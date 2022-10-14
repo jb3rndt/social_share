@@ -42,17 +42,17 @@ class SocialSharePlugin:FlutterPlugin, MethodCallHandler, ActivityAware {
             val backgroundTopColor: String? = call.argument("backgroundTopColor")
             val backgroundBottomColor: String? = call.argument("backgroundBottomColor")
             val attributionURL: String? = call.argument("attributionURL")
-            val file =  File(activeContext!!.cacheDir,stickerImage)
+            val file =  File(activeContext!!.cacheDir, stickerImage)
             val stickerImageFile = FileProvider.getUriForFile(activeContext!!, activeContext!!.applicationContext.packageName + ".com.shekarmudaliyar.social_share", file)
 
             val intent = Intent("com.instagram.share.ADD_TO_STORY")
-            intent.type = "image/*"
+            intent.setType("image/*")
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("interactive_asset_uri", stickerImageFile)
-            if (backgroundImage!=null) {
+            if (backgroundImage != null) {
                 //check if background image is also provided
-                val backfile =  File(activeContext!!.cacheDir,backgroundImage)
+                val backfile =  File(activeContext!!.cacheDir, backgroundImage)
                 val backgroundImageFile = FileProvider.getUriForFile(activeContext!!, activeContext!!.applicationContext.packageName + ".com.shekarmudaliyar.social_share", backfile)
                 intent.setDataAndType(backgroundImageFile,"image/*")
             }
@@ -76,7 +76,7 @@ class SocialSharePlugin:FlutterPlugin, MethodCallHandler, ActivityAware {
             val attributionURL: String? = call.argument("attributionURL")
             val appId: String? = call.argument("appId")
 
-            val file =  File(activeContext!!.cacheDir,stickerImage)
+            val file =  File(activeContext!!.cacheDir, stickerImage)
             val stickerImageFile = FileProvider.getUriForFile(activeContext!!, activeContext!!.applicationContext.packageName + ".com.shekarmudaliyar.social_share", file)
             val intent = Intent("com.facebook.stories.ADD_TO_STORY")
             intent.type = "image/*"
@@ -105,7 +105,7 @@ class SocialSharePlugin:FlutterPlugin, MethodCallHandler, ActivityAware {
 
             if (image!=null) {
                 //check if  image is also provided
-                val imagefile =  File(activeContext!!.cacheDir,image)
+                val imagefile =  File(activeContext!!.cacheDir, image)
                 val imageFileUri = FileProvider.getUriForFile(activeContext!!, activeContext!!.applicationContext.packageName + ".com.shekarmudaliyar.social_share", imagefile)
                 intent.type = "image/*"
                 intent.putExtra(Intent.EXTRA_STREAM,imageFileUri)
