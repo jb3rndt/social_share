@@ -9,12 +9,12 @@ class SocialShare {
   static const MethodChannel _channel = const MethodChannel('social_share');
 
   static Future<String?> shareInstagramStory(
-      String imagePath, {
-        String? backgroundTopColor,
-        String? backgroundBottomColor,
-        String? attributionURL,
-        String? backgroundImagePath,
-      }) async {
+    String imagePath, {
+    String? backgroundTopColor,
+    String? backgroundBottomColor,
+    String? attributionURL,
+    String? backgroundImagePath,
+  }) async {
     Map<String, dynamic> args;
     if (Platform.isIOS) {
       if (backgroundImagePath == null) {
@@ -72,10 +72,7 @@ class SocialShare {
   }
 
   static Future<String?> shareFacebookStory(
-      String imagePath,
-      String backgroundTopColor,
-      String backgroundBottomColor,
-      String attributionURL,
+      String imagePath, String backgroundTopColor, String backgroundBottomColor, String attributionURL,
       {String? appId}) async {
     Map<String, dynamic> args;
     if (Platform.isIOS) {
@@ -103,8 +100,7 @@ class SocialShare {
         "appId": appId
       };
     }
-    final String? response =
-    await _channel.invokeMethod('shareFacebookStory', args);
+    final String? response = await _channel.invokeMethod('shareFacebookStory', args);
     return response;
   }
 
@@ -138,8 +134,7 @@ class SocialShare {
     return version;
   }
 
-  static Future<String?> shareSms(String message,
-      {String? url, String? trailingText}) async {
+  static Future<String?> shareSms(String message, {String? url, String? trailingText}) async {
     Map<String, dynamic>? args;
     if (Platform.isIOS) {
       if (url == null) {
@@ -163,15 +158,12 @@ class SocialShare {
   }
 
   static Future<bool?> copyToClipboard(content) async {
-    final Map<String, String> args = <String, String>{
-      "content": content.toString()
-    };
+    final Map<String, String> args = <String, String>{"content": content.toString()};
     final bool? response = await _channel.invokeMethod('copyToClipboard', args);
     return response;
   }
 
-  static Future<bool?> shareOptions(String contentText,
-      {String? imagePath}) async {
+  static Future<bool?> shareOptions(String contentText, {String? imagePath}) async {
     Map<String, dynamic> args;
     if (Platform.isIOS) {
       args = <String, dynamic>{"image": imagePath, "content": contentText};
